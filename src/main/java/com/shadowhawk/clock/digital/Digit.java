@@ -12,7 +12,7 @@ import static com.mumfrey.liteloader.gl.GL.glEnableCulling;
 import static com.mumfrey.liteloader.gl.GL.glEnableTexture2D;
 import static com.mumfrey.liteloader.gl.GL.glPopMatrix;
 import static com.mumfrey.liteloader.gl.GL.glPushMatrix;
-import static com.mumfrey.liteloader.gl.GL.glTranslatef;
+//import static com.mumfrey.liteloader.gl.GL.glTranslatef;
 import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION;
 
 import org.lwjgl.util.ReadableColor;

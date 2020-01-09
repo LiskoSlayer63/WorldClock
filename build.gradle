@@ -1,46 +1,54 @@
 buildscript {
     repositories {
-        mavenLocal()
-        mavenCentral()
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = 'sponge'
-            url = 'http://repo.spongepowered.org/maven'
-        }
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
     }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
-apply plugin: 'net.minecraftforge.gradle.liteloader'
-
-version = "1.2.1-beta"
-group = "com.shadowhawk" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "worldclock"
-
-minecraft {
-    version = "1.12"
-    mappings = "snapshot_20170627"
-    runDir = "run"
+repositories {
+    //maven {
+    //    name 'biomesoplenty'
+    //    url 'http://blamejared.com/maven'
+    //}
 }
 
-litemod {
-    json {
-        name = "worldclock"
-        mcversion = "1.12.r1"
-        author = "Shadow_Hawk"
+group= "com.shadowhawk.clock"
+version = "1.2.1"
+archivesBaseName = "WorldClock"
+//bopversion = "1.12.2-7.0.1.2399"
+
+minecraft {
+    version = "1.12.2-14.23.5.2814"
+    runDir = "run"
+    mappings = "stable_39"
+}
+
+dependencies {
+	//deobfCompile "com.github.glitchfiend.biomesoplenty:BiomesOPlenty:1.12.2-7.0.1.2426:universal"
+    //compile files("libs/GrappleMod.jar")
+}
+
+processResources
+{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
     }
 }
 
 jar {
-    from litemod.outputs
+    manifest {
+        //attributes 'FMLAT': 'bopadditions_at.cfg'
+    }
 }

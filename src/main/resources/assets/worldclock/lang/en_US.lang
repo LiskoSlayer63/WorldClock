@@ -13,7 +13,5 @@ worldclock.configpanel.button.worldtoggle.true.text=World Clock: True
 worldclock.configpanel.button.worldtoggle.false.text=World Clock: False
 worldclock.configpanel.button.systemtoggle.true.text=System Clock: True
 worldclock.configpanel.button.systemtoggle.false.text=System Clock: False
-worldclock.configpanel.button.clocktype.true.text=Digital Clock
-worldclock.configpanel.button.clocktype.false.text=Analog Clock
 
 key.clock.toggle=Toggle Clock

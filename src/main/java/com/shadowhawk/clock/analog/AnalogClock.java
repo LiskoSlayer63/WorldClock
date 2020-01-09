@@ -12,13 +12,12 @@ import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION
 import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.Clock;
-import com.shadowhawk.clock.LiteModWorldClock;
+import com.shadowhawk.clock.ClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.math.MathHelper;
 
 
 /**
@@ -98,13 +97,13 @@ public class AnalogClock extends Clock
 		{
 			// First, update the hand angles
 			sysHands.calculateAngles();
-			mcHands.calculateAngles(Minecraft.getMinecraft());
+			mcHands.calculateAngles(minecraft);
 			
 			// Then render the actual clock
-			if(LiteModWorldClock.instance.systemClock || LiteModWorldClock.instance.worldClock)
+			if(ClockConfig.systemClock || ClockConfig.worldClock)
 			{
 				this.renderClock(minecraft);
-				if(nextClock != null)
+				if(ClockConfig.useIndicator && nextClock != null)
 				{
 					nextClock.render(minecraft);
 				}
@@ -123,11 +122,11 @@ public class AnalogClock extends Clock
 		this.renderClockFace(minecraft);
 		
 		// Render each of the hands
-		if(LiteModWorldClock.instance.systemClock)
+		if(ClockConfig.systemClock)
 		{
 			sysHands.render();
 		}
-		if(LiteModWorldClock.instance.worldClock)
+		if(ClockConfig.worldClock)
 		{
 			mcHands.render();
 		}

@@ -1,0 +1,12 @@
+[
+{
+  "modid": "worldclock",
+  "name": "World Clock",
+  "description": "",
+  "version": "1.2.1 Beta",
+  "mcversion": "1.12.2",
+  "authorList": ["LizNet", "LiskoSlayer63", "digitalshadowhawk", "mumfrey"],
+  "credits": "Sources written by mumfrey and digitalshadowhawk. Ported to Forge by LiskoSlayer63.",
+  "logoFile": "assets/worldclock/textures/logo.png"
+}
+]
