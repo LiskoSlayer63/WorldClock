@@ -2,11 +2,11 @@
 {
   "modid": "worldclock",
   "name": "World Clock",
-  "description": "",
+  "description": "Provides a clock face and hands for the Minecraft world time and the time your computer displays -- perfect for use with fullscreen.",
   "version": "1.2.1 Beta",
   "mcversion": "1.12.2",
-  "authorList": ["LizNet", "LiskoSlayer63", "digitalshadowhawk", "mumfrey"],
-  "credits": "Sources written by mumfrey and digitalshadowhawk. Ported to Forge by LiskoSlayer63.",
+  "authorList": ["LiskoSlayer63", "Shadow_Hawk"],
+  "credits": "Sources written by Shadow_Hawk. Ported to Forge by LiskoSlayer63.",
   "logoFile": "assets/worldclock/textures/logo.png"
 }
 ]

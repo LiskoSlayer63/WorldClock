@@ -1,23 +1,10 @@
 package com.shadowhawk.clock.digital;
 
-import static com.mumfrey.liteloader.gl.GL.GL_ONE_MINUS_SRC_ALPHA;
-import static com.mumfrey.liteloader.gl.GL.GL_POLYGON;
-import static com.mumfrey.liteloader.gl.GL.GL_SRC_ALPHA;
-import static com.mumfrey.liteloader.gl.GL.glBlendFunc;
-import static com.mumfrey.liteloader.gl.GL.glColor4f;
-import static com.mumfrey.liteloader.gl.GL.glDisableBlend;
-import static com.mumfrey.liteloader.gl.GL.glDisableCulling;
-import static com.mumfrey.liteloader.gl.GL.glDisableTexture2D;
-import static com.mumfrey.liteloader.gl.GL.glEnableCulling;
-import static com.mumfrey.liteloader.gl.GL.glEnableTexture2D;
-import static com.mumfrey.liteloader.gl.GL.glPopMatrix;
-import static com.mumfrey.liteloader.gl.GL.glPushMatrix;
-//import static com.mumfrey.liteloader.gl.GL.glTranslatef;
-import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION;
-
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.ReadableColor;
 
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class Digit {
 	private int number;
@@ -145,16 +132,16 @@ public class Digit {
 	public void drawRect(float x, float y, float width, float length, ReadableColor color, int orientation)
 	{
 		// Push the current transform onto the stack
-			glPushMatrix();
+		GlStateManager.pushMatrix();
 			
-			// Transform to the location of the segment
-			//glTranslatef(x, y, 0);
-			
-			// draw the segment
-			glDrawSeg(x, y, x + width, y + length, color, orientation);
-			
-			// and finally restore the current transform
-			glPopMatrix();
+		// Transform to the location of the segment
+		//glTranslatef(x, y, 0);
+		
+		// draw the segment
+		glDrawSeg(x, y, x + width, y + length, color, orientation);
+		
+		// and finally restore the current transform
+		GlStateManager.popMatrix();
 	}
 	
 	/**
@@ -172,16 +159,16 @@ public class Digit {
 	private static void glDrawSeg(float x1, float y1, float x2, float y2, ReadableColor color, int orientation)
     {
 		// Set GL modes
-        glDisableBlend();
-        glDisableTexture2D();
-        glDisableCulling();
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(color.getRed(), color.getGreen(), color.getBlue(), 1.0F);
+		GlStateManager.disableBlend();
+		GlStateManager.disableTexture2D();
+		GlStateManager.disableCull();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), 1.0F);
         
         // Draw the polygon
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(GL_POLYGON, POSITION);
+        worldRenderer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION);
         worldRenderer.pos(x1, y2, 0).endVertex();
         worldRenderer.pos((x1+x2)/2, y2 + (orientation * Math.abs(x1-x2)), 0).endVertex();
         worldRenderer.pos(x2, y2, 0).endVertex();
@@ -193,7 +180,7 @@ public class Digit {
         tessellator.draw();
         
         // Restore GL modes
-        glEnableCulling();
-        glEnableTexture2D();
+        GlStateManager.enableCull();
+        GlStateManager.enableTexture2D();
     }
 }

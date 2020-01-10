@@ -10,16 +10,12 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
-    //maven {
-    //    name 'biomesoplenty'
-    //    url 'http://blamejared.com/maven'
-    //}
+
 }
 
 group= "com.shadowhawk.clock"
 version = "1.2.1"
 archivesBaseName = "WorldClock"
-//bopversion = "1.12.2-7.0.1.2399"
 
 minecraft {
     version = "1.12.2-14.23.5.2814"
@@ -28,8 +24,7 @@ minecraft {
 }
 
 dependencies {
-	//deobfCompile "com.github.glitchfiend.biomesoplenty:BiomesOPlenty:1.12.2-7.0.1.2426:universal"
-    //compile files("libs/GrappleMod.jar")
+
 }
 
 processResources
@@ -49,6 +44,6 @@ processResources
 
 jar {
     manifest {
-        //attributes 'FMLAT': 'bopadditions_at.cfg'
+    
     }
 }

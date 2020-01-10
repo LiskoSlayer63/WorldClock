@@ -1,27 +1,13 @@
 package com.shadowhawk.clock.analog;
 
-import static com.mumfrey.liteloader.gl.GL.GL_ONE_MINUS_SRC_ALPHA;
-import static com.mumfrey.liteloader.gl.GL.GL_QUADS;
-import static com.mumfrey.liteloader.gl.GL.GL_SRC_ALPHA;
-import static com.mumfrey.liteloader.gl.GL.glBlendFunc;
-import static com.mumfrey.liteloader.gl.GL.glColor4f;
-import static com.mumfrey.liteloader.gl.GL.glDisableBlend;
-import static com.mumfrey.liteloader.gl.GL.glDisableCulling;
-import static com.mumfrey.liteloader.gl.GL.glDisableTexture2D;
-import static com.mumfrey.liteloader.gl.GL.glEnableCulling;
-import static com.mumfrey.liteloader.gl.GL.glEnableTexture2D;
-import static com.mumfrey.liteloader.gl.GL.glPopMatrix;
-import static com.mumfrey.liteloader.gl.GL.glPushMatrix;
-import static com.mumfrey.liteloader.gl.GL.glRotatef;
-import static com.mumfrey.liteloader.gl.GL.glTranslatef;
-import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION;
-
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.ClockData;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class ClockHands extends ClockData{	
 	
@@ -31,16 +17,16 @@ public class ClockHands extends ClockData{
 	private static void glDrawRect(float x1, float y1, float x2, float y2, ReadableColor colour)
     {
 		// Set GL modes
-        glDisableBlend();
-        glDisableTexture2D();
-        glDisableCulling();
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(colour.getRed(), colour.getGreen(), colour.getBlue(), 1.0F);
+		GlStateManager.disableBlend();
+		GlStateManager.disableTexture2D();
+		GlStateManager.disableCull();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.color(colour.getRed(), colour.getGreen(), colour.getBlue(), 1.0F);
         
         // Draw the quad
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(GL_QUADS, POSITION);
+        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
         worldRenderer.pos(x1, y2, 0).endVertex();
         worldRenderer.pos(x2, y2, 0).endVertex();
         worldRenderer.pos(x2, y1, 0).endVertex();
@@ -48,8 +34,8 @@ public class ClockHands extends ClockData{
         tessellator.draw();
         
         // Restore GL modes
-        glEnableCulling();
-        glEnableTexture2D();
+        GlStateManager.enableCull();
+        GlStateManager.enableTexture2D();
     }
 	
 	/**
@@ -142,19 +128,19 @@ public class ClockHands extends ClockData{
 	private void renderClockHand(float angle, float length, float width, ReadableColor colour)
 	{
 		// Push the current transform onto the stack
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		
 		// Transform to the mid point of the clock
-		glTranslatef(this.xPos + (this.scale / 2), this.yPos + (this.scale / 2), 0);
+		GlStateManager.translate(this.xPos + (this.scale / 2), this.yPos + (this.scale / 2), 0);
 		
 		// and rotate by the hand angle
-		glRotatef(angle, 0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(angle, 0.0F, 0.0F, 1.0F);
 		
 		// then draw the hand (straight up of course)
 		glDrawRect(width * -0.5F, length * 0.2F, width * 0.5F, -length, colour);
 		
 		// and finally restore the current transform
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	

@@ -1,14 +1,6 @@
 package com.shadowhawk.clock.analog;
 
-import static com.mumfrey.liteloader.gl.GL.GL_GREATER;
-import static com.mumfrey.liteloader.gl.GL.GL_QUADS;
-import static com.mumfrey.liteloader.gl.GL.glAlphaFunc;
-import static com.mumfrey.liteloader.gl.GL.glColor4f;
-import static com.mumfrey.liteloader.gl.GL.glDisableBlend;
-import static com.mumfrey.liteloader.gl.GL.glDisableLighting;
-import static com.mumfrey.liteloader.gl.GL.glEnableTexture2D;
-import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION_TEX;
-
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.Clock;
@@ -17,6 +9,7 @@ import com.shadowhawk.clock.indicator.IndicatorArray;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -49,11 +42,11 @@ public class AnalogClock extends Clock
     static void glDrawTexturedRect(float x, float y, float width, float height, int u, int v, int u2, int v2)
     {
 		// Set the appropriate OpenGL modes
-		glDisableLighting();
-        glDisableBlend();
-		glAlphaFunc(GL_GREATER, 0.01F);
-		glEnableTexture2D();
-		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.disableLighting();
+		GlStateManager.disableBlend();
+		GlStateManager.alphaFunc(GL11.GL_GREATER, 0.01F);
+		GlStateManager.enableTexture2D();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		float texMapScale = 0.001953125F; // 512px
         
@@ -61,7 +54,7 @@ public class AnalogClock extends Clock
         // draw the quads more efficiently.
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(GL_QUADS, POSITION_TEX);
+        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
         worldRenderer.pos(x + 0,     y + height, 0).tex(u  * texMapScale, v2 * texMapScale).endVertex();
         worldRenderer.pos(x + width, y + height, 0).tex(u2 * texMapScale, v2 * texMapScale).endVertex();
         worldRenderer.pos(x + width, y + 0,      0).tex(u2 * texMapScale, v  * texMapScale).endVertex();
@@ -80,8 +73,8 @@ public class AnalogClock extends Clock
 	{
 		super(xPos, yPos);
 		
-		this.mcHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, size, ReadableColor.GREY, ReadableColor.WHITE, true);
-		this.sysHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, size, ReadableColor.PURPLE, ReadableColor.PURPLE, ReadableColor.PURPLE, false);
+		this.mcHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, ClockConfig.clockSize, ReadableColor.GREY, ReadableColor.WHITE, true);
+		this.sysHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, ClockConfig.clockSize, ReadableColor.PURPLE, ReadableColor.PURPLE, ReadableColor.PURPLE, false);
 		this.nextClock = new IndicatorArray(nextClockCoords[0], nextClockCoords[1]);
 		
 	}

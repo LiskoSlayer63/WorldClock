@@ -4,6 +4,7 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Ignore;
+import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.common.config.Config.RequiresMcRestart;
 
@@ -13,34 +14,19 @@ public class ClockConfig
 	@Ignore
 	public static float clockSize = 64;
 	
-	@Comment({
-		  "Toggles the clock visibility."
-	})
-	@Name("Clock Visible")
+	@LangKey("gui.clock.config.clock_visible")
 	public static boolean clockVisible = true;
-	
-	@Comment({
-		  "Displays current game time."
-	})
-	@Name("World Clock")
+
+	@LangKey("gui.clock.config.world_clock")
 	public static boolean worldClock = true;
-	
-	@Comment({
-		  "Displays current system time."
-	})
-	@Name("System Clock")
+
+	@LangKey("gui.clock.config.system_clock")
 	public static boolean systemClock = false;
-	
-	@Comment({
-		  "Use a digital clock instead of an analog."
-	})
-	@Name("Digital Mode")
+
+	@LangKey("gui.clock.config.digital_mode")
 	public static boolean digitalMode = false;
-	
-	@Comment({
-		  "Use the AM/PM indicator."
-	})
-	@Name("AM/PM Indicator")
+
+	@LangKey("gui.clock.config.use_indicator")
 	public static boolean useIndicator = false;
 
 	
@@ -50,7 +36,7 @@ public class ClockConfig
 	})
 	@Name("Enable Debug")
 	@RequiresMcRestart
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 	
 	
 	public static void sync()

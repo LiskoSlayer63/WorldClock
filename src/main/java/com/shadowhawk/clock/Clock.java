@@ -6,24 +6,14 @@ public class Clock {
 
 	public Clock(float x, float y)
 	{
-		this.setPosition(xPos, yPos);
-		this.setSize(64);
+		this.setPosition(x, y);
 	}
 	
 	protected float xPos, yPos;
-
-	/**
-	 * Size and position for the clock
-	 */
 	protected float size;
 	
 	protected Clock nextClock = null;
 	public float[] nextClockCoords = {10, 10};
-	
-	/**
-	 * Whether the clock is currently visible
-	 */
-	protected boolean visible = true;
 	
 	/**
 	 * Get the current size
@@ -38,19 +28,7 @@ public class Clock {
 	 */
 	public boolean isVisible()
 	{
-		return this.visible;
-	}
-	
-	/**
-	 * Set the location of the top left corner of the clock
-	 * 
-	 * @param xPos
-	 * @param yPos
-	 */
-	public void setPosition(float xPos, float yPos)
-	{
-		this.xPos = Math.max(10,  xPos);
-		this.yPos = Math.max(10,  yPos);
+		return ClockConfig.clockVisible;
 	}
 	
 	/**
@@ -64,12 +42,15 @@ public class Clock {
 	}
 	
 	/**
-	 * Set whether the clock should be visible
-	 * @param visible new visibility setting
+	 * Set the location of the top left corner of the clock
+	 * 
+	 * @param xPos
+	 * @param yPos
 	 */
-	public void setVisible(boolean visible)
+	public void setPosition(float xPos, float yPos)
 	{
-		this.visible = visible;
+		this.xPos = Math.max(10,  xPos);
+		this.yPos = Math.max(10,  yPos);
 	}
 	
 	/**
