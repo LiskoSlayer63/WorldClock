@@ -15,28 +15,28 @@ public class ClockHands extends ClockData{
 	 * Draw an opaque rectangle
 	 */
 	private static void glDrawRect(float x1, float y1, float x2, float y2, ReadableColor colour)
-    {
+	{
 		// Set GL modes
 		GlStateManager.disableBlend();
 		GlStateManager.disableTexture2D();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color(colour.getRed(), colour.getGreen(), colour.getBlue(), 1.0F);
-        
-        // Draw the quad
+		
+		// Draw the quad
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-        worldRenderer.pos(x1, y2, 0).endVertex();
-        worldRenderer.pos(x2, y2, 0).endVertex();
-        worldRenderer.pos(x2, y1, 0).endVertex();
-        worldRenderer.pos(x1, y1, 0).endVertex();
-        tessellator.draw();
-        
-        // Restore GL modes
-        GlStateManager.enableCull();
-        GlStateManager.enableTexture2D();
-    }
+		worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
+		worldRenderer.pos(x1, y2, 0).endVertex();
+		worldRenderer.pos(x2, y2, 0).endVertex();
+		worldRenderer.pos(x2, y1, 0).endVertex();
+		worldRenderer.pos(x1, y1, 0).endVertex();
+		tessellator.draw();
+		
+		// Restore GL modes
+		GlStateManager.enableCull();
+		GlStateManager.enableTexture2D();
+	}
 	
 	/**
 	 * Angles for the hands
@@ -87,7 +87,7 @@ public class ClockHands extends ClockData{
 	}
 	void calculateAngles()
 	{
-	    super.updateTimes();
+		super.updateTimes();
 		
 		this.smallHandAngle  = 360.0F * (0.0833F * hour + 0.00138F * minute);
 		this.largeHandAngle  = 360.0F * (0.0166F * minute);
@@ -96,7 +96,7 @@ public class ClockHands extends ClockData{
 	
 	void calculateAngles(Minecraft minecraft)
 	{
-	    super.updateTimes(minecraft);
+		super.updateTimes(minecraft);
 		
 		this.smallHandAngle  = 360.0F * (0.0833F * hour + 0.00138F * minute);
 		this.largeHandAngle  = 360.0F * (0.0166F * minute);

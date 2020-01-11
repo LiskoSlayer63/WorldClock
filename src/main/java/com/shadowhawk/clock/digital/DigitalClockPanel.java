@@ -101,15 +101,15 @@ public class DigitalClockPanel extends ClockData{
 	public void updateTimes(Minecraft minecraft)
 	{
 		super.updateTimes(minecraft);
-    	if(hour == 0)
-    	{
-    		hour = 12;
-    	}
-    	
-    	time[0].setDigit((int)(hour/10));
-    	time[1].setDigit((int)(hour%10));
-    	time[2].setDigit((int)(minute/10));
-    	time[3].setDigit((int)(minute%10));
+		if(hour == 0)
+		{
+			hour = 12;
+		}
+		
+		time[0].setDigit((int)(hour/10));
+		time[1].setDigit((int)(hour%10));
+		time[2].setDigit((int)(minute/10));
+		time[3].setDigit((int)(minute%10));
 	}
 	
 	/**
@@ -119,15 +119,15 @@ public class DigitalClockPanel extends ClockData{
 		super.updateTimes();
 		if(hour == 0)
 		{
-    		hour = 12;
-    	}
-    	
-    	//DEBUG DIGIT
-    	//time[0].setDigit(8);
-    	time[0].setDigit((int)(hour/10));
-    	time[1].setDigit((int)(hour%10));
-    	time[2].setDigit((int)(minute/10));
-    	time[3].setDigit((int)(minute%10));
+			hour = 12;
+		}
+		
+		//DEBUG DIGIT
+		//time[0].setDigit(8);
+		time[0].setDigit((int)(hour/10));
+		time[1].setDigit((int)(hour%10));
+		time[2].setDigit((int)(minute/10));
+		time[3].setDigit((int)(minute%10));
 	}
 	
 	/**

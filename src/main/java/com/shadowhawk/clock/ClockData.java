@@ -26,9 +26,9 @@ public class ClockData {
 	protected void updateTimes()
 	{
 		Calendar calendar = Calendar.getInstance();
-    	hour   = calendar.get(Calendar.HOUR);
-    	minute = calendar.get(Calendar.MINUTE);
-    	second = calendar.get(Calendar.SECOND);
+		hour   = calendar.get(Calendar.HOUR);
+		minute = calendar.get(Calendar.MINUTE);
+		second = calendar.get(Calendar.SECOND);
 	}
 	
 	/**
@@ -38,9 +38,9 @@ public class ClockData {
 	protected void updateTimes(Minecraft minecraft)
 	{
 		long ticks = (minecraft.world.getWorldTime() + 6000) % 12000;
-	    
-    	hour   = MathHelper.floor(ticks * 0.001F);
-    	minute = MathHelper.floor(ticks * 0.06F) % 60;
+		
+		hour   = MathHelper.floor(ticks * 0.001F);
+		minute = MathHelper.floor(ticks * 0.06F) % 60;
 		second = MathHelper.floor(ticks * 3.6F) % 60;
 	}
 	

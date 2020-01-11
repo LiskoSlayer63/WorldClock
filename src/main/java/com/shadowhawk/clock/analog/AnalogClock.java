@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.Clock;
-import com.shadowhawk.clock.ClockConfig;
+import com.shadowhawk.clock.WorldClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
 
 import net.minecraft.client.Minecraft;
@@ -37,10 +37,10 @@ public class AnalogClock extends Clock
 	private static final ResourceLocation CLOCKFACE = new ResourceLocation("worldclock", "textures/clock/face.png");
 	
 	/**
-     * Draw a rectangle using the currently bound texture
-     */
-    static void glDrawTexturedRect(float x, float y, float width, float height, int u, int v, int u2, int v2)
-    {
+	 * Draw a rectangle using the currently bound texture
+	 */
+	static void glDrawTexturedRect(float x, float y, float width, float height, int u, int v, int u2, int v2)
+	{
 		// Set the appropriate OpenGL modes
 		GlStateManager.disableLighting();
 		GlStateManager.disableBlend();
@@ -49,18 +49,18 @@ public class AnalogClock extends Clock
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		float texMapScale = 0.001953125F; // 512px
-        
-        // We use the tessellator rather than drawing individual quads because it uses vertex arrays to
-        // draw the quads more efficiently.
+		
+		// We use the tessellator rather than drawing individual quads because it uses vertex arrays to
+		// draw the quads more efficiently.
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        worldRenderer.pos(x + 0,     y + height, 0).tex(u  * texMapScale, v2 * texMapScale).endVertex();
-        worldRenderer.pos(x + width, y + height, 0).tex(u2 * texMapScale, v2 * texMapScale).endVertex();
-        worldRenderer.pos(x + width, y + 0,      0).tex(u2 * texMapScale, v  * texMapScale).endVertex();
-        worldRenderer.pos(x + 0,     y + 0,      0).tex(u  * texMapScale, v  * texMapScale).endVertex();
-        tessellator.draw();
-    }
+		worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		worldRenderer.pos(x + 0,	 y + height, 0).tex(u  * texMapScale, v2 * texMapScale).endVertex();
+		worldRenderer.pos(x + width, y + height, 0).tex(u2 * texMapScale, v2 * texMapScale).endVertex();
+		worldRenderer.pos(x + width, y + 0,	  0).tex(u2 * texMapScale, v  * texMapScale).endVertex();
+		worldRenderer.pos(x + 0,	 y + 0,	  0).tex(u  * texMapScale, v  * texMapScale).endVertex();
+		tessellator.draw();
+	}
 	
 	
 	private ClockHands mcHands, sysHands;
@@ -73,8 +73,8 @@ public class AnalogClock extends Clock
 	{
 		super(xPos, yPos);
 		
-		this.mcHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, ClockConfig.clockSize, ReadableColor.GREY, ReadableColor.WHITE, true);
-		this.sysHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, ClockConfig.clockSize, ReadableColor.PURPLE, ReadableColor.PURPLE, ReadableColor.PURPLE, false);
+		this.mcHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, WorldClockConfig.clockSize, ReadableColor.GREY, ReadableColor.WHITE, true);
+		this.sysHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, WorldClockConfig.clockSize, ReadableColor.PURPLE, ReadableColor.PURPLE, ReadableColor.PURPLE, false);
 		this.nextClock = new IndicatorArray(nextClockCoords[0], nextClockCoords[1]);
 		
 	}
@@ -93,10 +93,10 @@ public class AnalogClock extends Clock
 			mcHands.calculateAngles(minecraft);
 			
 			// Then render the actual clock
-			if(ClockConfig.systemClock || ClockConfig.worldClock)
+			if(WorldClockConfig.systemClock || WorldClockConfig.worldClock)
 			{
 				this.renderClock(minecraft);
-				if(ClockConfig.useIndicator && nextClock != null)
+				if(WorldClockConfig.useIndicator && nextClock != null)
 				{
 					nextClock.render(minecraft);
 				}
@@ -115,11 +115,11 @@ public class AnalogClock extends Clock
 		this.renderClockFace(minecraft);
 		
 		// Render each of the hands
-		if(ClockConfig.systemClock)
+		if(WorldClockConfig.systemClock)
 		{
 			sysHands.render();
 		}
-		if(ClockConfig.worldClock)
+		if(WorldClockConfig.worldClock)
 		{
 			mcHands.render();
 		}
@@ -140,10 +140,10 @@ public class AnalogClock extends Clock
 	}
 
 	
-    @Override
+	@Override
 	public void setSize(float scale)
 	{
-    	super.setSize(scale);
+		super.setSize(scale);
 		this.nextClockCoords[0] = xPos + 0.90F * this.size;
 		this.nextClockCoords[1] = yPos + 0.16F * this.size;
 		updateNextClockCoords();

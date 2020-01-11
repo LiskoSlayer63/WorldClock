@@ -3,7 +3,7 @@ package com.shadowhawk.clock.digital;
 import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.Clock;
-import com.shadowhawk.clock.ClockConfig;
+import com.shadowhawk.clock.WorldClockConfig;
 import com.shadowhawk.clock.Logger;
 import com.shadowhawk.clock.indicator.IndicatorArray;
 
@@ -40,10 +40,10 @@ public class DigitalClock extends Clock{
 			sysPanel.updateTimes();
 			//mcPanel.updateTimes(Minecraft.getMinecraft());
 			mcPanel.updateTimes(minecraft); //TODO
-			if(ClockConfig.systemClock || ClockConfig.worldClock)
+			if(WorldClockConfig.systemClock || WorldClockConfig.worldClock)
 			{
 				this.renderClock(minecraft);
-				if(ClockConfig.useIndicator && nextClock != null)
+				if(WorldClockConfig.useIndicator && nextClock != null)
 				{
 					nextClock.render(minecraft);
 				}
@@ -57,11 +57,11 @@ public class DigitalClock extends Clock{
 	 */
 	private void renderClock(Minecraft minecraft)
 	{
-		if(ClockConfig.systemClock)
+		if(WorldClockConfig.systemClock)
 		{
 			sysPanel.render();
 		}
-		if(ClockConfig.worldClock)
+		if(WorldClockConfig.worldClock)
 		{
 			mcPanel.render();
 		}

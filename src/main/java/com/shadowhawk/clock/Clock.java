@@ -28,7 +28,7 @@ public class Clock {
 	 */
 	public boolean isVisible()
 	{
-		return ClockConfig.clockVisible;
+		return WorldClockConfig.clockVisible;
 	}
 	
 	/**

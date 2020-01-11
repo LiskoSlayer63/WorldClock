@@ -8,8 +8,8 @@ import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.Name;
 import net.minecraftforge.common.config.Config.RequiresMcRestart;
 
-@Config(modid = ForgeModWorldClock.MOD_ID)
-public class ClockConfig 
+@Config(modid = WorldClock.MOD_ID)
+public class WorldClockConfig 
 {
 	@Ignore
 	public static float clockSize = 64;
@@ -41,7 +41,7 @@ public class ClockConfig
 	
 	public static void sync()
 	{
-		ConfigManager.sync(ForgeModWorldClock.MOD_ID, Config.Type.INSTANCE);
+		ConfigManager.sync(WorldClock.MOD_ID, Config.Type.INSTANCE);
 		
 		Logger.debug("Configuration changed!");
 	}

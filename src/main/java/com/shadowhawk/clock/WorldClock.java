@@ -9,7 +9,6 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
@@ -19,12 +18,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * @author Zachary Cook
  */
 
-@Mod(modid = ForgeModWorldClock.MOD_ID, name = ForgeModWorldClock.MOD_NAME, version = ForgeModWorldClock.MOD_VERSION, acceptedMinecraftVersions = "[1.12.2]", clientSideOnly = true)
-@Mod.EventBusSubscriber(modid = ForgeModWorldClock.MOD_ID)
-public class ForgeModWorldClock
+@Mod(modid = WorldClock.MOD_ID, name = WorldClock.MOD_NAME, version = WorldClock.MOD_VERSION, acceptedMinecraftVersions = "[1.12.2]", clientSideOnly = true)
+@Mod.EventBusSubscriber(modid = WorldClock.MOD_ID)
+public class WorldClock
 {
-	@Mod.Instance(ForgeModWorldClock.MOD_ID)
-	public static ForgeModWorldClock instance;
+	@Mod.Instance(WorldClock.MOD_ID)
+	public static WorldClock instance;
 	
 	public static final String MOD_ID = "worldclock";
 	public static final String MOD_NAME = "World Clock";
@@ -48,12 +47,12 @@ public class ForgeModWorldClock
 	 * in the mod constructor EXCEPT for initialising any non-game-interfacing components or performing
 	 * sanity checking prior to initialisation
 	 */
-	public ForgeModWorldClock()
+	public WorldClock()
 	{
 		if (instance != null) {
-		    throw new RuntimeException("Double instantiation of " + MOD_NAME);
+			throw new RuntimeException("Double instantiation of " + MOD_NAME);
 		} else {
-		    instance = this;
+			instance = this;
 		}
 	}
 
@@ -61,7 +60,7 @@ public class ForgeModWorldClock
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		Logger.init(event.getModLog());
-		Logger.enableDebug(ClockConfig.DEBUG);
+		Logger.enableDebug(WorldClockConfig.DEBUG);
 		Logger.debug("========= P R E  I N I T =========");
 
 		clockKeyBinding = new KeyBinding("key.clock.toggle", Keyboard.KEY_F12, MOD_NAME);
@@ -72,15 +71,9 @@ public class ForgeModWorldClock
 	{
 		Logger.debug("========= I N I T =========");
 
-		clock.setSize(ClockConfig.clockSize);
-		clock2.setSize(ClockConfig.clockSize);
+		clock.setSize(WorldClockConfig.clockSize);
+		clock2.setSize(WorldClockConfig.clockSize);
 		
 		ClientRegistry.registerKeyBinding(clockKeyBinding);
-	}
-
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) 
-	{
-		Logger.debug("========= P O S T  I N I T =========");
 	}
 }

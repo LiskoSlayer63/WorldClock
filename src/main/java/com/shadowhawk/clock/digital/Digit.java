@@ -126,8 +126,8 @@ public class Digit {
 	 * @param length Length of the segment
 	 * @param color Color of the segment
 	 * @param orientation Determines which sides of the segment get pointed tips; 
-	 *     0 = horizontal
-	 *     1 = vertical
+	 *	 0 = horizontal
+	 *	 1 = vertical
 	 */
 	public void drawRect(float x, float y, float width, float length, ReadableColor color, int orientation)
 	{
@@ -153,34 +153,34 @@ public class Digit {
 	 * @param y2
 	 * @param color
 	 * @param orientation Determines which sides of the segment get pointed tips; 
-	 *     0 = horizontal
-	 *     1 = vertical
+	 *	 0 = horizontal
+	 *	 1 = vertical
 	 */
 	private static void glDrawSeg(float x1, float y1, float x2, float y2, ReadableColor color, int orientation)
-    {
+	{
 		// Set GL modes
 		GlStateManager.disableBlend();
 		GlStateManager.disableTexture2D();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), 1.0F);
-        
-        // Draw the polygon
+		
+		// Draw the polygon
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION);
-        worldRenderer.pos(x1, y2, 0).endVertex();
-        worldRenderer.pos((x1+x2)/2, y2 + (orientation * Math.abs(x1-x2)), 0).endVertex();
-        worldRenderer.pos(x2, y2, 0).endVertex();
-        worldRenderer.pos(x2 + ((1 -orientation) * Math.abs(y1-y2)), (y1+y2)/2, 0).endVertex();
-        worldRenderer.pos(x2, y1, 0).endVertex();
-        worldRenderer.pos((x1+x2)/2, y1 - (orientation * Math.abs(x1-x2)), 0).endVertex();
-        worldRenderer.pos(x1, y1, 0).endVertex();
-        worldRenderer.pos(x1 - ((1 -orientation) * Math.abs(y1-y2)), (y1+y2)/2, 0).endVertex();
-        tessellator.draw();
-        
-        // Restore GL modes
-        GlStateManager.enableCull();
-        GlStateManager.enableTexture2D();
-    }
+		worldRenderer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION);
+		worldRenderer.pos(x1, y2, 0).endVertex();
+		worldRenderer.pos((x1+x2)/2, y2 + (orientation * Math.abs(x1-x2)), 0).endVertex();
+		worldRenderer.pos(x2, y2, 0).endVertex();
+		worldRenderer.pos(x2 + ((1 -orientation) * Math.abs(y1-y2)), (y1+y2)/2, 0).endVertex();
+		worldRenderer.pos(x2, y1, 0).endVertex();
+		worldRenderer.pos((x1+x2)/2, y1 - (orientation * Math.abs(x1-x2)), 0).endVertex();
+		worldRenderer.pos(x1, y1, 0).endVertex();
+		worldRenderer.pos(x1 - ((1 -orientation) * Math.abs(y1-y2)), (y1+y2)/2, 0).endVertex();
+		tessellator.draw();
+		
+		// Restore GL modes
+		GlStateManager.enableCull();
+		GlStateManager.enableTexture2D();
+	}
 }
