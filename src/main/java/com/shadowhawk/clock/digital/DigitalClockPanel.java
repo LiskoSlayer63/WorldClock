@@ -1,9 +1,9 @@
 package com.shadowhawk.clock.digital;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.ClockData;
+import com.shadowhawk.clock.Color;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
@@ -24,7 +24,7 @@ public class DigitalClockPanel extends ClockData{
 	 * @param color Color of the entire clock
 	 * @param isMinecraft Determines whether to check minecraft world time or system clock
 	 */
-	public DigitalClockPanel(Minecraft minecraft, float xPos, float yPos, float scale, ReadableColor color, boolean isMinecraft)
+	public DigitalClockPanel(Minecraft minecraft, float xPos, float yPos, float scale, Color color, boolean isMinecraft)
 	{
 		this.color = color;
 		this.xPos = xPos;
@@ -69,14 +69,14 @@ public class DigitalClockPanel extends ClockData{
 		drawFilledCircle(xPos + 0.38F * scale, yPos + 0.21F * scale, 0.02F * scale, color, 1.0F);
 	}
 	
-	public void drawFilledCircle(float x, float y, float radius, ReadableColor color, float transparency){
+	public void drawFilledCircle(float x, float y, float radius, Color color, float transparency){
 		int triangleAmount = 20; //# of triangles used to draw circle
 		float processedTransparency = Math.min(1.0f, Math.max(0.0f, transparency));
 		GlStateManager.disableBlend();
 		GlStateManager.disableTexture2D();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), processedTransparency);
+		GlStateManager.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), processedTransparency);
 		
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder vertexBuffer = tessellator.getBuffer();

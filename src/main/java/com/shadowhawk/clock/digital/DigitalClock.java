@@ -1,8 +1,7 @@
 package com.shadowhawk.clock.digital;
 
-import org.lwjgl.util.ReadableColor;
-
 import com.shadowhawk.clock.Clock;
+import com.shadowhawk.clock.Color;
 import com.shadowhawk.clock.WorldClockConfig;
 import com.shadowhawk.clock.Logger;
 import com.shadowhawk.clock.indicator.IndicatorArray;
@@ -22,8 +21,8 @@ public class DigitalClock extends Clock{
 		super(xPos, yPos);
 		this.setSize(64);
 		
-		this.mcPanel = new DigitalClockPanel(Minecraft.getMinecraft(), this.xPos, this.yPos + 10, size, ReadableColor.GREY, true);
-		this.sysPanel = new DigitalClockPanel(Minecraft.getMinecraft(), this.xPos, this.yPos + 10 + 0.32F * size, size, ReadableColor.PURPLE, true);
+		this.mcPanel = new DigitalClockPanel(Minecraft.getInstance(), this.xPos, this.yPos + 10, size, Color.fromColor(java.awt.Color.GRAY), true);
+		this.sysPanel = new DigitalClockPanel(Minecraft.getInstance(), this.xPos, this.yPos + 10 + 0.32F * size, size, Color.fromColor(java.awt.Color.MAGENTA), true);
 		this.nextClock = new IndicatorArray(nextClockCoords[0], nextClockCoords[1]);
 		Logger.debug("Digital Clock Instantiation finished: (" + xPos + ", " + yPos + ") ");
 	}
@@ -82,7 +81,7 @@ public class DigitalClock extends Clock{
 		{
 			nextClock.setSize(scale);
 		}
-		this.mcPanel = new DigitalClockPanel(Minecraft.getMinecraft(), xPos, yPos, this.size, ReadableColor.GREY, true);
-		this.sysPanel = new DigitalClockPanel(Minecraft.getMinecraft(), xPos, yPos + 0.32F * size, this.size, ReadableColor.PURPLE, false);
+		this.mcPanel = new DigitalClockPanel(Minecraft.getInstance(), xPos, yPos, this.size, Color.fromColor(java.awt.Color.GRAY), true);
+		this.sysPanel = new DigitalClockPanel(Minecraft.getInstance(), xPos, yPos + 0.32F * size, this.size, Color.fromColor(java.awt.Color.MAGENTA), false);
 	}
 }

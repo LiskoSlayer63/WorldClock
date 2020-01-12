@@ -1,15 +1,21 @@
 package com.shadowhawk.clock;
 
-import org.lwjgl.input.Keyboard;
+import org.apache.logging.log4j.LogManager;
+import org.lwjgl.glfw.GLFW;
 
 import com.shadowhawk.clock.analog.AnalogClock;
 import com.shadowhawk.clock.digital.DigitalClock;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 /**
  * This is a very simple example LiteMod, it draws an analogue clock on the minecraft HUD using
@@ -18,11 +24,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * @author Zachary Cook
  */
 
-@Mod(modid = WorldClock.MOD_ID, name = WorldClock.MOD_NAME, version = WorldClock.MOD_VERSION, acceptedMinecraftVersions = "[1.12.2]", clientSideOnly = true)
+//@Mod(modid = WorldClock.MOD_ID, name = WorldClock.MOD_NAME, version = WorldClock.MOD_VERSION, acceptedMinecraftVersions = "[1.12.2]", clientSideOnly = true)
+@Mod(WorldClock.MOD_ID)
 @Mod.EventBusSubscriber(modid = WorldClock.MOD_ID)
 public class WorldClock
 {
-	@Mod.Instance(WorldClock.MOD_ID)
+
 	public static WorldClock instance;
 	
 	public static final String MOD_ID = "worldclock";
@@ -51,29 +58,41 @@ public class WorldClock
 	{
 		if (instance != null) {
 			throw new RuntimeException("Double instantiation of " + MOD_NAME);
-		} else {
-			instance = this;
 		}
-	}
-
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) 
-	{
-		Logger.init(event.getModLog());
+		instance = this;
+			
+		Logger.init(LogManager.getLogger());
 		Logger.enableDebug(WorldClockConfig.DEBUG);
-		Logger.debug("========= P R E  I N I T =========");
-
-		clockKeyBinding = new KeyBinding("key.clock.toggle", Keyboard.KEY_F12, MOD_NAME);
+		
+	    FMLJavaModLoadingContext.get().getModEventBus().addListener(this::preInit);
+	    
+	    DistExecutor.runWhenOn(Dist.CLIENT, ()->()-> {
+	    	FMLJavaModLoadingContext.get().getModEventBus().addListener(this::init);
+	    });
 	}
 
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) 
+	public void preInit(FMLCommonSetupEvent event) 
+	{
+		Logger.debug("========= P R E  I N I T =========");
+		
+		ModLoadingContext.get().registerConfig(Type.COMMON, WorldClockConfig.spec);
+	}
+
+	public void init(FMLClientSetupEvent event) 
 	{
 		Logger.debug("========= I N I T =========");
 
 		clock.setSize(WorldClockConfig.clockSize);
 		clock2.setSize(WorldClockConfig.clockSize);
+
+		clockKeyBinding = new KeyBinding("key.clock.toggle", GLFW.GLFW_KEY_F12, MOD_NAME);
 		
 		ClientRegistry.registerKeyBinding(clockKeyBinding);
+		
+		Input.init();
+		
+		//FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEvents::onConfigChanged);
+		//FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEvents::onRenderGameOverlay);
+		//FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientEvents::onClientTick);
 	}
 }

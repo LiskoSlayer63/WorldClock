@@ -1,9 +1,9 @@
 package com.shadowhawk.clock.analog;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.ClockData;
+import com.shadowhawk.clock.Color;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
@@ -14,14 +14,14 @@ public class ClockHands extends ClockData{
 	/**
 	 * Draw an opaque rectangle
 	 */
-	private static void glDrawRect(float x1, float y1, float x2, float y2, ReadableColor colour)
+	private static void glDrawRect(float x1, float y1, float x2, float y2, Color colour)
 	{
 		// Set GL modes
 		GlStateManager.disableBlend();
 		GlStateManager.disableTexture2D();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color(colour.getRed(), colour.getGreen(), colour.getBlue(), 1.0F);
+		GlStateManager.color4f(colour.getRedF(), colour.getGreenF(), colour.getBlueF(), colour.getAlphaF());
 		
 		// Draw the quad
 		Tessellator tessellator = Tessellator.getInstance();
@@ -56,13 +56,13 @@ public class ClockHands extends ClockData{
 	/**
 	 * Colours for each of the hands
 	 */
-	private ReadableColor smallHandColour, largeHandColour, secondHandColour;
+	private Color smallHandColour, largeHandColour, secondHandColour;
 	
 	
 
 	private boolean hasSeconds;
 	
-	public ClockHands(Minecraft minecraft, float xPos, float yPos, float size, ReadableColor smallHandColor, ReadableColor largeHandColor, boolean isMinecraft)
+	public ClockHands(Minecraft minecraft, float xPos, float yPos, float size, Color smallHandColor, Color largeHandColor, boolean isMinecraft)
 	{
 		this.largeHandColour  = largeHandColor;   
 		this.smallHandColour  = smallHandColor;
@@ -76,7 +76,7 @@ public class ClockHands extends ClockData{
 		setSize();
 	}
 	
-	public ClockHands(Minecraft minecraft, float xPos, float yPos, float size, ReadableColor smallHandColor, ReadableColor largeHandColor, ReadableColor secondHandColor, boolean isMinecraft)
+	public ClockHands(Minecraft minecraft, float xPos, float yPos, float size, Color smallHandColor, Color largeHandColor, Color secondHandColor, boolean isMinecraft)
 	{
 		this(minecraft, xPos, yPos, size, smallHandColor, largeHandColor, isMinecraft);
 		this.secondHandColour = secondHandColor;
@@ -125,16 +125,16 @@ public class ClockHands extends ClockData{
 	/**
 	 * Render one of the hands 
 	 */
-	private void renderClockHand(float angle, float length, float width, ReadableColor colour)
+	private void renderClockHand(float angle, float length, float width, Color colour)
 	{
 		// Push the current transform onto the stack
 		GlStateManager.pushMatrix();
 		
 		// Transform to the mid point of the clock
-		GlStateManager.translate(this.xPos + (this.scale / 2), this.yPos + (this.scale / 2), 0);
+		GlStateManager.translatef(this.xPos + (this.scale / 2), this.yPos + (this.scale / 2), 0);
 		
 		// and rotate by the hand angle
-		GlStateManager.rotate(angle, 0.0F, 0.0F, 1.0F);
+		GlStateManager.rotatef(angle, 0.0F, 0.0F, 1.0F);
 		
 		// then draw the hand (straight up of course)
 		glDrawRect(width * -0.5F, length * 0.2F, width * 0.5F, -length, colour);

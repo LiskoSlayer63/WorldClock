@@ -1,9 +1,10 @@
 package com.shadowhawk.clock.analog;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.ReadableColor;
 
 import com.shadowhawk.clock.Clock;
+import com.shadowhawk.clock.Color;
+import com.shadowhawk.clock.Logger;
 import com.shadowhawk.clock.WorldClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
 
@@ -46,7 +47,7 @@ public class AnalogClock extends Clock
 		GlStateManager.disableBlend();
 		GlStateManager.alphaFunc(GL11.GL_GREATER, 0.01F);
 		GlStateManager.enableTexture2D();
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		float texMapScale = 0.001953125F; // 512px
 		
@@ -73,10 +74,11 @@ public class AnalogClock extends Clock
 	{
 		super(xPos, yPos);
 		
-		this.mcHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, WorldClockConfig.clockSize, ReadableColor.GREY, ReadableColor.WHITE, true);
-		this.sysHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, WorldClockConfig.clockSize, ReadableColor.PURPLE, ReadableColor.PURPLE, ReadableColor.PURPLE, false);
+		this.mcHands = new ClockHands(Minecraft.getInstance(), xPos, yPos, WorldClockConfig.clockSize, Color.fromColor(java.awt.Color.WHITE), Color.fromColor(java.awt.Color.WHITE), true);
+		this.sysHands = new ClockHands(Minecraft.getInstance(), xPos, yPos, WorldClockConfig.clockSize, Color.fromColor(java.awt.Color.MAGENTA), Color.fromColor(java.awt.Color.MAGENTA), Color.fromColor(java.awt.Color.MAGENTA), false);
 		this.nextClock = new IndicatorArray(nextClockCoords[0], nextClockCoords[1]);
 		
+		Logger.debug(CLOCKFACE.getPath());
 	}
 	
 	/**
@@ -133,7 +135,7 @@ public class AnalogClock extends Clock
 	private void renderClockFace(Minecraft minecraft)
 	{
 		// Bind the texture resource
-		minecraft.getTextureManager().bindTexture(AnalogClock.CLOCKFACE);
+		minecraft.getTextureManager().bindTexture(CLOCKFACE);
 		
 		// Draw a rectangle using the currently bound texture
 		glDrawTexturedRect(this.xPos, this.yPos, this.size, this.size, 1, 1, 511, 511);
@@ -151,7 +153,7 @@ public class AnalogClock extends Clock
 		{
 			nextClock.setSize(scale * 1.7F);
 		}
-		this.mcHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, this.size, ReadableColor.GREY, ReadableColor.WHITE, true);
-		this.sysHands = new ClockHands(Minecraft.getMinecraft(), xPos, yPos, this.size, ReadableColor.PURPLE, ReadableColor.PURPLE, ReadableColor.PURPLE, false);
+		this.mcHands = new ClockHands(Minecraft.getInstance(), xPos, yPos, this.size, Color.fromColor(java.awt.Color.WHITE), Color.fromColor(java.awt.Color.WHITE), true);
+		this.sysHands = new ClockHands(Minecraft.getInstance(), xPos, yPos, this.size, Color.fromColor(java.awt.Color.MAGENTA), Color.fromColor(java.awt.Color.MAGENTA), Color.fromColor(java.awt.Color.MAGENTA), false);
 	}
 }

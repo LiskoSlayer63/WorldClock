@@ -1,7 +1,8 @@
 package com.shadowhawk.clock.digital;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.ReadableColor;
+
+import com.shadowhawk.clock.Color;
 
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -12,7 +13,7 @@ public class Digit {
 	private float xPos;
 	private float yPos;
 	private float scale;
-	private ReadableColor color;
+	private Color color;
 	private boolean hideZero = false;
 	
 	/**
@@ -26,7 +27,7 @@ public class Digit {
 	 * @param scale Scaling factor of the digit
 	 * @param color Color of the digit
 	 */
-	public Digit(int digit, int max, float x, float y, float scale, ReadableColor color)
+	public Digit(int digit, int max, float x, float y, float scale, Color color)
 	{
 		number = digit;
 		max = Math.min(10, max);
@@ -48,7 +49,7 @@ public class Digit {
 	 * @param color Color of the digit
 	 * @param hideZero Whether the numeral should be hidden when it is equal to zero, such as leading zeroes
 	 */
-	public Digit(int digit, int max, float x, float y, float scale, ReadableColor color, boolean hideZero)
+	public Digit(int digit, int max, float x, float y, float scale, Color color, boolean hideZero)
 	{
 		this(digit, max, x, y, scale, color);
 		this.hideZero = hideZero;
@@ -129,7 +130,7 @@ public class Digit {
 	 *	 0 = horizontal
 	 *	 1 = vertical
 	 */
-	public void drawRect(float x, float y, float width, float length, ReadableColor color, int orientation)
+	public void drawRect(float x, float y, float width, float length, Color color, int orientation)
 	{
 		// Push the current transform onto the stack
 		GlStateManager.pushMatrix();
@@ -156,14 +157,14 @@ public class Digit {
 	 *	 0 = horizontal
 	 *	 1 = vertical
 	 */
-	private static void glDrawSeg(float x1, float y1, float x2, float y2, ReadableColor color, int orientation)
+	private static void glDrawSeg(float x1, float y1, float x2, float y2, Color color, int orientation)
 	{
 		// Set GL modes
 		GlStateManager.disableBlend();
 		GlStateManager.disableTexture2D();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color(color.getRed(), color.getGreen(), color.getBlue(), 1.0F);
+		GlStateManager.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), color.getAlphaF());
 		
 		// Draw the polygon
 		Tessellator tessellator = Tessellator.getInstance();
