@@ -2,6 +2,8 @@ package com.shadowhawk.clock;
 
 import java.util.Calendar;
 
+import com.shadowhawk.clock.utils.Color;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 

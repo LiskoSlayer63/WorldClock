@@ -5,7 +5,7 @@ import java.util.Calendar;
 import org.lwjgl.opengl.GL11;
 
 import com.shadowhawk.clock.ClockData;
-import com.shadowhawk.clock.Color;
+import com.shadowhawk.clock.utils.Color;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;

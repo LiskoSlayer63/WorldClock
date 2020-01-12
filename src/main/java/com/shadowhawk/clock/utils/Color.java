@@ -1,4 +1,4 @@
-package com.shadowhawk.clock;
+package com.shadowhawk.clock.utils;
 
 public class Color 
 {

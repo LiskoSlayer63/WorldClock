@@ -3,10 +3,10 @@ package com.shadowhawk.clock.analog;
 import org.lwjgl.opengl.GL11;
 
 import com.shadowhawk.clock.Clock;
-import com.shadowhawk.clock.Color;
-import com.shadowhawk.clock.Logger;
-import com.shadowhawk.clock.WorldClockConfig;
+import com.shadowhawk.clock.config.WorldClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
+import com.shadowhawk.clock.utils.Color;
+import com.shadowhawk.clock.utils.Logger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;

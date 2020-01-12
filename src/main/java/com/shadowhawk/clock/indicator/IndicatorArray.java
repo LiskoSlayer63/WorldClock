@@ -1,7 +1,7 @@
 package com.shadowhawk.clock.indicator;
 
 import com.shadowhawk.clock.Clock;
-import com.shadowhawk.clock.Color;
+import com.shadowhawk.clock.utils.Color;
 
 import net.minecraft.client.Minecraft;
 

@@ -1,5 +1,7 @@
 package com.shadowhawk.clock;
 
+import com.shadowhawk.clock.config.WorldClockConfig;
+
 import net.minecraft.client.Minecraft;
 
 public class Clock {

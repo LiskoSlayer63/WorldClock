@@ -1,10 +1,10 @@
 package com.shadowhawk.clock.digital;
 
 import com.shadowhawk.clock.Clock;
-import com.shadowhawk.clock.Color;
-import com.shadowhawk.clock.WorldClockConfig;
-import com.shadowhawk.clock.Logger;
+import com.shadowhawk.clock.config.WorldClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
+import com.shadowhawk.clock.utils.Color;
+import com.shadowhawk.clock.utils.Logger;
 
 import net.minecraft.client.Minecraft;
 
