@@ -1,14 +1,15 @@
 {
-  "key.clock.toggle": "Toggle Clock",
-  "key.clock.size": "Cycle Size",
-  "gui.clock.config.clock_visible": "Clock Visible",
-  "gui.clock.config.clock_visible.tooltip": "Toggles the clock visibility",
-  "gui.clock.config.world_clock": "World Clock",
-  "gui.clock.config.world_clock.tooltip": "Displays current game time",
-  "gui.clock.config.system_clock": "System Clock"
-  "gui.clock.config.system_clock.tooltip": "Displays current system time"
-  "gui.clock.config.digital_mode": "Digital Mode"
-  "gui.clock.config.digital_mode.tooltip": "Use a digital clock instead of an analog"
-  "gui.clock.config.use_indicator": "AM/PM Indicator"
-  "gui.clock.config.use_indicator.tooltip": "Use the AM/PM indicator"
+  "worldclock.key.toggle": "Toggle Clock",
+  "worldclock.key.size": "Cycle Size",
+  
+  "worldclock.config.clock_visible": "Clock Visible",
+  "worldclock.config.clock_visible.tooltip": "Toggles the clock visibility",
+  "worldclock.config.world_clock": "World Clock",
+  "worldclock.config.world_clock.tooltip": "Displays current game time",
+  "worldclock.config.system_clock": "System Clock",
+  "worldclock.config.system_clock.tooltip": "Displays current system time",
+  "worldclock.config.digital_mode": "Digital Mode",
+  "worldclock.config.digital_mode.tooltip": "Use a digital clock instead of an analog",
+  "worldclock.config.use_indicator": "AM/PM Indicator",
+  "worldclock.config.use_indicator.tooltip": "Use the AM/PM indicator"
 }

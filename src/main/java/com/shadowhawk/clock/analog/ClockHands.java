@@ -2,6 +2,7 @@ package com.shadowhawk.clock.analog;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.shadowhawk.clock.ClockData;
 import com.shadowhawk.clock.utils.Color;
 
@@ -18,7 +19,7 @@ public class ClockHands extends ClockData{
 	{
 		// Set GL modes
 		GlStateManager.disableBlend();
-		GlStateManager.disableTexture2D();
+		GlStateManager.disableTexture();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color4f(colour.getRedF(), colour.getGreenF(), colour.getBlueF(), colour.getAlphaF());
@@ -35,7 +36,7 @@ public class ClockHands extends ClockData{
 		
 		// Restore GL modes
 		GlStateManager.enableCull();
-		GlStateManager.enableTexture2D();
+		GlStateManager.enableTexture();
 	}
 	
 	/**

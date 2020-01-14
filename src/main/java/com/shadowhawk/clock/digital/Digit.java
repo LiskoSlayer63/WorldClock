@@ -2,6 +2,7 @@ package com.shadowhawk.clock.digital;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.shadowhawk.clock.utils.Color;
 
 import net.minecraft.client.renderer.*;
@@ -161,7 +162,7 @@ public class Digit {
 	{
 		// Set GL modes
 		GlStateManager.disableBlend();
-		GlStateManager.disableTexture2D();
+		GlStateManager.disableTexture();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), color.getAlphaF());
@@ -182,6 +183,6 @@ public class Digit {
 		
 		// Restore GL modes
 		GlStateManager.enableCull();
-		GlStateManager.enableTexture2D();
+		GlStateManager.enableTexture();
 	}
 }

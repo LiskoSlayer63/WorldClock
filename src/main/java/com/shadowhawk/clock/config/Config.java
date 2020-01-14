@@ -2,9 +2,10 @@ package com.shadowhawk.clock.config;
 
 import com.shadowhawk.clock.utils.Logger;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
+
+import static com.shadowhawk.clock.WorldClock.MOD_ID;
 
 /**
  * For configuration settings that change the behaviour of code on the LOGICAL CLIENT.
@@ -25,24 +26,24 @@ final class Config
 		builder.push("general");
 		
 		clockVisible = builder
-				.comment(I18n.format("gui.clock.config.clock_visible.tooltip"))
-        		.translation("gui.clock.config.clock_visible")
+				.comment("Toggles the clock visibility")
+        		.translation(MOD_ID + ".config.clock_visible")
         		.define("clockVisible", true);
         worldClock = builder
-				.comment(I18n.format("gui.clock.config.world_clock.tooltip"))
-        		.translation("gui.clock.config.world_clock")
+				.comment("Displays current game time")
+        		.translation(MOD_ID + ".config.world_clock")
         		.define("worldClock", true);
         systemClock = builder
-				.comment(I18n.format("gui.clock.config.system_clock.tooltip"))
-        		.translation("gui.clock.config.system_clock")
+				.comment("Displays current system time")
+        		.translation(MOD_ID + ".config.system_clock")
         		.define("systemClock", false);
         digitalMode = builder
-				.comment(I18n.format("gui.clock.config.digital_mode.tooltip"))
-        		.translation("gui.clock.config.digital_mode")
+				.comment("Use a digital clock instead of an analog")
+        		.translation(MOD_ID + ".config.digital_mode")
         		.define("digitalMode", false);
         useIndicator = builder
-				.comment(I18n.format("gui.clock.config.use_indicator.tooltip"))
-        		.translation("gui.clock.config.use_indicator")
+				.comment("Use the AM/PM indicator")
+        		.translation(MOD_ID + ".config.use_indicator")
         		.define("useIndicator", false);
         
 		builder.pop();

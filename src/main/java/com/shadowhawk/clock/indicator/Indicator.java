@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.shadowhawk.clock.ClockData;
 import com.shadowhawk.clock.utils.Color;
 
@@ -35,7 +36,7 @@ public class Indicator extends ClockData{
 		int triangleAmount = 20; //# of triangles used to draw circle
 		float processedTransparency = Math.min(1.0f, Math.max(0.0f, transparency));
 		GlStateManager.disableBlend();
-		GlStateManager.disableTexture2D();
+		GlStateManager.disableTexture();
 		GlStateManager.disableCull();
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), processedTransparency);
@@ -53,6 +54,6 @@ public class Indicator extends ClockData{
 		tessellator.draw();
 		
 		GlStateManager.enableCull();
-		GlStateManager.enableTexture2D();
+		GlStateManager.enableTexture();
 	}
 }

@@ -2,6 +2,7 @@ package com.shadowhawk.clock.analog;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.shadowhawk.clock.Clock;
 import com.shadowhawk.clock.config.WorldClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
@@ -46,7 +47,7 @@ public class AnalogClock extends Clock
 		GlStateManager.disableLighting();
 		GlStateManager.disableBlend();
 		GlStateManager.alphaFunc(GL11.GL_GREATER, 0.01F);
-		GlStateManager.enableTexture2D();
+		GlStateManager.enableTexture();
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		float texMapScale = 0.001953125F; // 512px
