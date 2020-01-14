@@ -44,7 +44,7 @@ public class ClientEvents
 
 		boolean sync = false;
 		
-		if (WorldClock.clockKeyBinding.isPressed() && !WorldClock.sizeKeyBinding.isPressed())
+		if (WorldClock.clockKeyBinding.isPressed())
 		{
 			WorldClockConfig.clockVisible = !WorldClockConfig.clockVisible;
 			sync = true;

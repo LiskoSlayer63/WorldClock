@@ -80,8 +80,8 @@ public class WorldClock
 		clock.setSize(WorldClockConfig.clockSize);
 		clock2.setSize(WorldClockConfig.clockSize);
 		
-		clockKeyBinding = new KeyBinding(I18n.format("key.clock.toggle"), GLFW.GLFW_KEY_F12, MOD_NAME);
-		sizeKeyBinding = new KeyBinding(I18n.format("key.clock.size"), GLFW.GLFW_KEY_UNKNOWN, MOD_NAME);
+		clockKeyBinding = new KeyBinding(I18n.format(MOD_ID + ".key.toggle"), GLFW.GLFW_KEY_F12, MOD_NAME);
+		sizeKeyBinding = new KeyBinding(I18n.format(MOD_ID + ".key.size"), GLFW.GLFW_KEY_UNKNOWN, MOD_NAME);
 
 		ClientRegistry.registerKeyBinding(sizeKeyBinding);
 		ClientRegistry.registerKeyBinding(clockKeyBinding);
