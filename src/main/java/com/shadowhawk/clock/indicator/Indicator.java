@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.shadowhawk.clock.ClockData;
 import com.shadowhawk.clock.utils.Color;
 
@@ -35,11 +35,11 @@ public class Indicator extends ClockData{
 	public void drawFilledCircle(float x, float y, float radius, Color color, float transparency){
 		int triangleAmount = 20; //# of triangles used to draw circle
 		float processedTransparency = Math.min(1.0f, Math.max(0.0f, transparency));
-		GlStateManager.disableBlend();
-		GlStateManager.disableTexture();
-		GlStateManager.disableCull();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), processedTransparency);
+		RenderSystem.disableBlend();
+		RenderSystem.disableTexture();
+		RenderSystem.disableCull();
+		RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		RenderSystem.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), processedTransparency);
 		
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder vertexBuffer = tessellator.getBuffer();
@@ -53,7 +53,7 @@ public class Indicator extends ClockData{
 			}
 		tessellator.draw();
 		
-		GlStateManager.enableCull();
-		GlStateManager.enableTexture();
+		RenderSystem.enableCull();
+		RenderSystem.enableTexture();
 	}
 }

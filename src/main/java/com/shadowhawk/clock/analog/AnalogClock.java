@@ -2,7 +2,7 @@ package com.shadowhawk.clock.analog;
 
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.shadowhawk.clock.Clock;
 import com.shadowhawk.clock.config.WorldClockConfig;
 import com.shadowhawk.clock.indicator.IndicatorArray;
@@ -44,11 +44,11 @@ public class AnalogClock extends Clock
 	static void glDrawTexturedRect(float x, float y, float width, float height, int u, int v, int u2, int v2)
 	{
 		// Set the appropriate OpenGL modes
-		GlStateManager.disableLighting();
-		GlStateManager.disableBlend();
-		GlStateManager.alphaFunc(GL11.GL_GREATER, 0.01F);
-		GlStateManager.enableTexture();
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.disableLighting();
+		RenderSystem.disableBlend();
+		RenderSystem.alphaFunc(GL11.GL_GREATER, 0.01F);
+		RenderSystem.enableTexture();
+		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		float texMapScale = 0.001953125F; // 512px
 		

@@ -2,7 +2,7 @@ package com.shadowhawk.clock.analog;
 
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.shadowhawk.clock.ClockData;
 import com.shadowhawk.clock.utils.Color;
 
@@ -18,11 +18,11 @@ public class ClockHands extends ClockData{
 	private static void glDrawRect(float x1, float y1, float x2, float y2, Color colour)
 	{
 		// Set GL modes
-		GlStateManager.disableBlend();
-		GlStateManager.disableTexture();
-		GlStateManager.disableCull();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color4f(colour.getRedF(), colour.getGreenF(), colour.getBlueF(), colour.getAlphaF());
+		RenderSystem.disableBlend();
+		RenderSystem.disableTexture();
+		RenderSystem.disableCull();
+		RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		RenderSystem.color4f(colour.getRedF(), colour.getGreenF(), colour.getBlueF(), colour.getAlphaF());
 		
 		// Draw the quad
 		Tessellator tessellator = Tessellator.getInstance();
@@ -35,8 +35,8 @@ public class ClockHands extends ClockData{
 		tessellator.draw();
 		
 		// Restore GL modes
-		GlStateManager.enableCull();
-		GlStateManager.enableTexture();
+		RenderSystem.enableCull();
+		RenderSystem.enableTexture();
 	}
 	
 	/**
@@ -129,19 +129,19 @@ public class ClockHands extends ClockData{
 	private void renderClockHand(float angle, float length, float width, Color colour)
 	{
 		// Push the current transform onto the stack
-		GlStateManager.pushMatrix();
+		RenderSystem.pushMatrix();
 		
 		// Transform to the mid point of the clock
-		GlStateManager.translatef(this.xPos + (this.scale / 2), this.yPos + (this.scale / 2), 0);
+		RenderSystem.translatef(this.xPos + (this.scale / 2), this.yPos + (this.scale / 2), 0);
 		
 		// and rotate by the hand angle
-		GlStateManager.rotatef(angle, 0.0F, 0.0F, 1.0F);
+		RenderSystem.rotatef(angle, 0.0F, 0.0F, 1.0F);
 		
 		// then draw the hand (straight up of course)
 		glDrawRect(width * -0.5F, length * 0.2F, width * 0.5F, -length, colour);
 		
 		// and finally restore the current transform
-		GlStateManager.popMatrix();
+		RenderSystem.popMatrix();
 	}
 
 	

@@ -2,7 +2,7 @@ package com.shadowhawk.clock.digital;
 
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.shadowhawk.clock.utils.Color;
 
 import net.minecraft.client.renderer.*;
@@ -134,7 +134,7 @@ public class Digit {
 	public void drawRect(float x, float y, float width, float length, Color color, int orientation)
 	{
 		// Push the current transform onto the stack
-		GlStateManager.pushMatrix();
+		RenderSystem.pushMatrix();
 			
 		// Transform to the location of the segment
 		//glTranslatef(x, y, 0);
@@ -143,7 +143,7 @@ public class Digit {
 		glDrawSeg(x, y, x + width, y + length, color, orientation);
 		
 		// and finally restore the current transform
-		GlStateManager.popMatrix();
+		RenderSystem.popMatrix();
 	}
 	
 	/**
@@ -161,11 +161,11 @@ public class Digit {
 	private static void glDrawSeg(float x1, float y1, float x2, float y2, Color color, int orientation)
 	{
 		// Set GL modes
-		GlStateManager.disableBlend();
-		GlStateManager.disableTexture();
-		GlStateManager.disableCull();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GlStateManager.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), color.getAlphaF());
+		RenderSystem.disableBlend();
+		RenderSystem.disableTexture();
+		RenderSystem.disableCull();
+		RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		RenderSystem.color4f(color.getRedF(), color.getGreenF(), color.getBlueF(), color.getAlphaF());
 		
 		// Draw the polygon
 		Tessellator tessellator = Tessellator.getInstance();
@@ -182,7 +182,7 @@ public class Digit {
 		tessellator.draw();
 		
 		// Restore GL modes
-		GlStateManager.enableCull();
-		GlStateManager.enableTexture();
+		RenderSystem.enableCull();
+		RenderSystem.enableTexture();
 	}
 }
