@@ -31,7 +31,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod.EventBusSubscriber(modid = WorldClock.MOD_ID)
 public class WorldClock
 {
-
 	public static WorldClock instance;
 	
 	public static final String MOD_ID = "worldclock";

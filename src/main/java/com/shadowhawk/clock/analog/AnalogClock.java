@@ -64,7 +64,6 @@ public class AnalogClock extends Clock
 		tessellator.draw();
 	}
 	
-	
 	private ClockHands mcHands, sysHands;
 	
 	/**
