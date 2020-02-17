@@ -9,5 +9,5 @@ final public class WorldClockConfig
     public static boolean digitalMode = false;
     public static boolean useIndicator = false;
 
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 }

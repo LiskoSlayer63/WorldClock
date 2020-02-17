@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[30,)"
+loaderVersion="[31,)"
 [[mods]]
 modId="worldclock"
 version="1.2.1 Beta"
@@ -15,13 +15,13 @@ Provides a clock face and hands for the Minecraft world time and the time your c
 [[dependencies.worldclock]]
 modId="forge"
 mandatory=true
-versionRange="[30,)"
+versionRange="[31,)"
 ordering="NONE"
 side="CLIENT"
 
 [[dependencies.worldclock]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.15.1]"
+versionRange="[1.15.2]"
 ordering="NONE"
 side="CLIENT"
